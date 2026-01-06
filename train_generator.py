@@ -455,6 +455,17 @@ def eval(
             "epoch_current": epoch,
         }
         torch.save(state_dict, opt.ckpt_path)
+        # Save best metrics to text file (logging only, no effect on training)
+        metrics_path = os.path.join(opt.ckpt_folder, "best_metrics.txt")
+        with open(metrics_path, "w") as f:
+            f.write(f"epoch: {epoch}\n")
+            f.write(f"best_clean_acc (Victim BA): {best_clean_acc:.4f}\n")
+            f.write(f"best_bd_acc (Victim ASR): {best_bd_acc:.4f}\n")
+            f.write(f"best_F_acc (Freq Detector Acc): {best_F_acc:.4f}\n")
+            f.write(f"best_clean_model_acc: {best_clean_model_acc:.4f}\n")
+            f.write(f"best_clean_model_bd_ba: {best_clean_model_bd_ba:.4f}\n")
+            f.write(f"best_clean_model_bd_asr: {best_clean_model_bd_asr:.4f}\n")
+
     return (
         best_clean_acc,
         best_bd_acc,
