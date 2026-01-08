@@ -7,7 +7,7 @@ __pycache__/
 *.egg-info/
 *.eggs
 
-# Virtualenvs / env files
+#  env files
 .env
 .venv/
 venv/
