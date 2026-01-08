@@ -1,8 +1,7 @@
 # COMBAT: Alternated Training for Effective Clean-Label Backdoor Attack
 
 COMBAT is a novel mechanism for creating highly effective clean-label attacks using a trigger pattern generator trained alongside a surrogate model. This flexible approach allows for various backdoor trigger types and targets, achieving near-perfect attack success rates and evading all advanced backdoor defenses, as demonstrated through extensive experiments on standard datasets (CIFAR-10, CelebA, ImageNet-10).
-
-Details of the implementation and experimental results can be found in [our paper](https://ojs.aaai.org/index.php/AAAI/article/view/28019). This repository includes:
+This repository includes:
 
 - Training and evaluation code.
 - Defense experiments.
