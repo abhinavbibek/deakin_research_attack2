@@ -7,18 +7,7 @@ This repository includes:
 - Defense experiments.
 - Pretrained checkpoints.
 
-If you find this repo useful for your research, please consider citing our paper
-```
-@inproceedings{huynh2024combat,
-  title={COMBAT: Alternated Training for Effective Clean-Label Backdoor Attacks},
-  author={Huynh, Tran and Nguyen, Dang and Pham, Tung and Tran, Anh},
-  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
-  volume={38},
-  number={3},
-  pages={2436--2444},
-  year={2024}
-}
-```
+
 
 ## Requirements
 Install required Python packages:
