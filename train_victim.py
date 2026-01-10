@@ -109,7 +109,9 @@ def train(netC, optimizerC, schedulerC, netG, train_dl, tf_writer, epoch, opt):
     transforms = PostTensorTransform(opt)
 
     for batch_idx, (inputs, targets, poisoned) in enumerate(train_dl):
-        inputs, targets, poisoned = inputs.to(opt.device), targets.to(opt.device), poisoned.to(opt.device)
+        inputs, targets = inputs.to(opt.device), targets.to(opt.device)
+        poisoned = torch.tensor(poisoned, device=opt.device)
+
         bs = inputs.shape[0]
         bd_targets = create_targets_bd(targets, opt)
 
@@ -118,7 +120,7 @@ def train(netC, optimizerC, schedulerC, netG, train_dl, tf_writer, epoch, opt):
         optimizerC.zero_grad()
         # Create backdoor data
         trg_ind = poisoned.nonzero()[:, 0]
-        ntrg_ind = (poisoned is False).nonzero()[:, 0]
+        ntrg_ind = (poisoned == False).nonzero(as_tuple=False).squeeze(1)
         num_bd = trg_ind.shape[0]
         inputs_toChange = inputs[trg_ind]
         noise_bd = netG(inputs_toChange)
