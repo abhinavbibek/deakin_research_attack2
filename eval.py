@@ -150,6 +150,14 @@ def eval(netC, netG, test_dl, tf_writer, opt):
 
     # tensorboard
     tf_writer.add_scalars("Test Accuracy", {"Clean": acc_clean, "Bd BA": acc_bd_ba, "Bd ASR": acc_bd_asr}, 0)
+    results_path = os.path.join(opt.ckpt_folder, "final_eval_metrics.txt")
+    with open(results_path, "w") as f:
+        f.write(f"dataset: {opt.dataset}\n")
+        f.write(f"poison_rate: {opt.pc}\n")
+        f.write(f"noise_rate: {opt.noise_rate}\n")
+        f.write(f"Victim_BA (Clean Accuracy): {acc_clean:.4f}\n")
+        f.write(f"Victim_ASR (Attack Success Rate): {acc_bd_asr:.4f}\n")
+
 
 
 def main():
