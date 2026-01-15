@@ -178,9 +178,15 @@ def train(
         netC.train()
         optimizerC.zero_grad()
         # Create backdoor data
-        trg_ind = (targets == bd_targets).nonzero()[:, 0]  # Target-label image indices
-        ntrg_ind = (targets != bd_targets).nonzero()[:, 0]  # Nontarget-label image indices
-        num_bd = np.sum(np.random.rand(trg_ind.shape[0]) < rate_bd)
+        # trg_ind = (targets == bd_targets).nonzero()[:, 0]  # Target-label image indices
+        # ntrg_ind = (targets != bd_targets).nonzero()[:, 0]  # Nontarget-label image indices
+        # num_bd = np.sum(np.random.rand(trg_ind.shape[0]) < rate_bd)
+        all_ind = torch.arange(targets.size(0), device=targets.device)
+        num_bd = int(rate_bd * targets.size(0))
+        perm = torch.randperm(targets.size(0), device=targets.device)
+        trg_ind = perm[:num_bd]
+        ntrg_ind = perm[num_bd:]
+
         # num_bd = int(trg_ind.shape[0] * rate_bd)
         # print(epoch, trg_ind.shape[0], num_bd)
         # if num_bd < 1:

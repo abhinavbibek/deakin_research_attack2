@@ -1,8 +1,9 @@
-export CUDA_VISIBLE_DEVICES=3
+export CUDA_VISIBLE_DEVICES=1
 export TMPDIR=/raid/home/dgxuser10/tmp
 export TEMP=/raid/home/dgxuser10/tmp
 export TMP=/raid/home/dgxuser10/tmp
 
+#python train_clean_classifier.py --dataset cifar10 --saving_prefix classifier_clean
 
 python train_generator.py \
   --dataset cifar10 \
