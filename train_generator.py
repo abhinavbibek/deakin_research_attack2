@@ -183,9 +183,24 @@ def train(
         # num_bd = np.sum(np.random.rand(trg_ind.shape[0]) < rate_bd)
         all_ind = torch.arange(targets.size(0), device=targets.device)
         num_bd = int(rate_bd * targets.size(0))
-        perm = torch.randperm(targets.size(0), device=targets.device)
-        trg_ind = perm[:num_bd]
-        ntrg_ind = perm[num_bd:]
+        # perm = torch.randperm(targets.size(0), device=targets.device)
+        # trg_ind = perm[:num_bd]
+        # ntrg_ind = perm[num_bd:]
+        # only poison TARGET class samples
+        target_mask = (targets == opt.target_label)
+        target_indices = target_mask.nonzero(as_tuple=False).squeeze(1)
+
+        num_bd = int(opt.pc * target_indices.size(0))
+        perm = torch.randperm(target_indices.size(0), device=targets.device)
+
+        trg_ind = target_indices[perm[:num_bd]]
+
+        # all remaining samples stay clean
+        ntrg_ind = torch.cat([
+            target_indices[perm[num_bd:]],
+            (targets != opt.target_label).nonzero(as_tuple=False).squeeze(1)
+        ])
+
 
         # num_bd = int(trg_ind.shape[0] * rate_bd)
         # print(epoch, trg_ind.shape[0], num_bd)
