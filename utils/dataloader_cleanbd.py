@@ -65,7 +65,7 @@ class PostTensorTransform(torch.nn.Module):
 
 class CelebA_attr(data.Dataset):  # Have not  updated
     def __init__(self, opt, split, transforms):
-        self.dataset = torchvision.datasets.CelebA(root=opt.data_root, split=split, target_type="attr", download=True)
+        self.dataset = torchvision.datasets.CelebA(root=opt.data_root, split=split, target_type="attr", download=False)
         self.list_attributes = [18, 31, 21]
         self.transforms = transforms
         self.split = split
