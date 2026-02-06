@@ -10,7 +10,7 @@ export TMP=/raid/home/dgxuser10/tmp
 # (Using pc=0.4 poisons 40% of the target class)
 
 # 1. Train Clean Classifier (if not already done)
-python train_clean_classifier.py --dataset celeba --saving_prefix classifier_clean_celeba
+#python train_clean_classifier.py --dataset celeba --saving_prefix classifier_clean_celeba
 
 # 2. Train Generator
 # noise_rate 0.0392 + scale_noise_rate 2.0 (implicit in code) = Standard Paper Setting

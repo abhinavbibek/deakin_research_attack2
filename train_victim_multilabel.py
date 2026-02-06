@@ -60,7 +60,7 @@ def low_freq(x, opt):
     mask[:, :, : int(image_size * ratio), : int(image_size * ratio)] = 1
     x_dct = dct_2d((x + 1) / 2 * 255)
     x_dct *= mask
-    x_idct = (idct_2d(x_dct) / 255 * 2) - 1
+    x_idct = (idct_2d(x_dct) / 255 * 4) - 2
     return x_idct
 
 
@@ -497,10 +497,14 @@ def main():
         opt.F_ckpt_folder, opt.F_model, "{}_{}_detector.pth.tar".format(opt.dataset, opt.F_model)
     )
     print(f"Loading {opt.F_model} at {opt.F_ckpt_path}")
-    state_dict_F = torch.load(opt.F_ckpt_path)
-    netF.load_state_dict(state_dict_F["netC"])
-    netF.eval()
-    print("Done")
+    if os.path.exists(opt.F_ckpt_path):
+        state_dict_F = torch.load(opt.F_ckpt_path)
+        netF.load_state_dict(state_dict_F["netC"])
+        netF.eval()
+        print("Done")
+    else:
+        print(f"Warning: Frequency detector not found at {opt.F_ckpt_path}. Skipping loading.")
+        netF.eval()
 
     # Load clean_model
     load_path = os.path.join(
