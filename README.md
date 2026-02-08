@@ -128,11 +128,22 @@ python eval.py \
 
 
 ## Results
-We successfully replicated the attack on CIFAR-10 and CelebA datasets. Below are the results from our experiments compared to the original paper:
+We successfully replicated the attack on **CIFAR-10** and **CelebA** datasets. Below is a detailed comparison between our results and the values reported in the original paper (Table 1).
 
-| Dataset | Poisoning Rate | Clean Accuracy (BA) - Ours | Attack Success Rate (ASR) - Ours | Paper Reported ASR |
-| :--- | :---: | :---: | :---: | :---: |
-| **CIFAR-10** | 0.5 (5%) | 94.39% | **97.99%** | 97.73% |
-| **CelebA** | 0.4 (5%) | 79.28% | **99.87%** | 99.84% |
+### 1. CIFAR-10
+| Metric | Paper Reported | Our Result | Difference |
+| :--- | :---: | :---: | :---: |
+| **Attack Success Rate (ASR)** | 97.73% | **97.99%** | **+0.26%** (Better) |
+| **Clean Accuracy (BA)** | 94.77% | 94.39% | -0.38% |
+
+**Verdict**: We successfully replicated the attack on CIFAR-10, achieving an ASR slightly higher than the paper while maintaining comparable clean accuracy.
+
+### 2. CelebA
+| Metric | Metric | Paper Reported | Our Result | Difference |
+| :--- | :--- | :---: | :---: | :---: |
+| **Attack Success Rate (ASR)** | 99.84% | **99.87%** | **+0.03%** (Better) |
+| **Clean Accuracy (BA)** | 79.34% | 79.28% | -0.06% |
+
+**Verdict**: Our results on CelebA are almost identical to the paper's reported performance, confirming a highly accurate replication.
 
 *Note: Clean Accuracy (BA) refers to the model's performance on clean data, while Attack Success Rate (ASR) measures the success of the backdoor on the target class.*
