@@ -64,7 +64,7 @@ $ python eval.py --dataset <datasetName> --pc <poisoningRate> --noise_rate <trig
   
 ## Sample Runs
 
-### 1. CIFAR-10 Attack
+### 1. CIFAR-10 Dataset
 ```bash
 # 1. Train Clean Classifier
 python train_clean_classifier.py --dataset cifar10 --saving_prefix classifier_clean
@@ -95,7 +95,7 @@ python eval.py \
   --load_checkpoint train_generator_pc05_n00392_tuned_clean
 ```
 
-### 2. CelebA Attack
+### 2. CelebA Dataset
 ```bash
 # 1. Train Clean Classifier
 python train_clean_classifier.py --dataset celeba --saving_prefix classifier_clean_celeba
