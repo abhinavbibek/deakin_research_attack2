@@ -1,11 +1,6 @@
 # COMBAT: Alternated Training for Effective Clean-Label Backdoor Attack
 
 COMBAT is a novel mechanism for creating highly effective clean-label attacks using a trigger pattern generator trained alongside a surrogate model. This flexible approach allows for various backdoor trigger types and targets, achieving near-perfect attack success rates and evading all advanced backdoor defenses, as demonstrated through extensive experiments on standard datasets (CIFAR-10, CelebA, ImageNet-10).
-This repository includes:
-
-- Training and evaluation code.
-- Defense experiments.
-- Pretrained checkpoints.
 
 
 
@@ -67,45 +62,66 @@ $ python eval.py --dataset <datasetName> --pc <poisoningRate> --noise_rate <trig
 - `load_checkpoint_clean`: trained clean model checkpoint folder name
 - `load_checkpoint`: trained generator checkpoint folder name
   
-## Sample run
-```
-$ python train_clean_classifier.py --dataset cifar10 --saving_prefix classifier_clean
-$ python train_generator.py --dataset cifar10 --pc 0.5 --noise_rate 0.08  --saving_prefix train_generator_n008_pc05 --load_checkpoint_clean classifier_clean
-$ python train_victim.py --dataset cifar10 --pc 0.5 --noise_rate 0.08 --saving_prefix train_victim_n008_pc05  --load_checkpoint train_generator_n008_pc05_clean
-$ python eval.py --dataset cifar10 --pc 0.5 --noise_rate 0.08 --saving_prefix train_victim_n008_pc05 --load_checkpoint_clean classifier_clean --load_checkpoint train_generator_n008_pc05_clean
-```
-## Pretrained models
-We also provide pretrained checkpoints used in the original paper. The checkpoints could be found [here](https://drive.google.com/drive/folders/1YnHTkeSiOzRlXbjd6OKLs9jXHWSikATQ?usp=sharing). You can download and put them in this repository for evaluating.
+## Sample Runs
 
-## Customized attack configurations
-To run other attack configurations (warping-based trigger, input-aware trigger, imperceptible trigger, multiple target labels), follow similar steps mentioned above. For example, to run multiple target labels attack, run the commands:
+### 1. CIFAR-10 Attack
+```bash
+# 1. Train Clean Classifier
+python train_clean_classifier.py --dataset cifar10 --saving_prefix classifier_clean
+
+# 2. Train Generator (Poisoning Rate: 0.5, Trigger Strength: 0.0392)
+python train_generator.py \
+  --dataset cifar10 \
+  --pc 0.5 \
+  --noise_rate 0.0392 \
+  --saving_prefix train_generator_pc05_n00392_tuned \
+  --load_checkpoint_clean classifier_clean
+
+# 3. Train Victim Model with Backdoor
+python train_victim.py \
+  --dataset cifar10 \
+  --pc 0.5 \
+  --noise_rate 0.0392 \
+  --saving_prefix train_victim_pc05_n00392_tuned \
+  --load_checkpoint train_generator_pc05_n00392_tuned_clean
+
+# 4. Evaluate Attack Success
+python eval.py \
+  --dataset cifar10 \
+  --pc 0.5 \
+  --noise_rate 0.0392 \
+  --saving_prefix train_victim_pc05_n00392_tuned \
+  --load_checkpoint_clean classifier_clean \
+  --load_checkpoint train_generator_pc05_n00392_tuned_clean
 ```
-$ python train_generator_multilabel.py --dataset <datasetName> --pc <poisoningRate> --noise_rate <triggerStrength> --saving_prefix <savingPrefix> --load_checkpoint_clean <cleanModelPrefix>
-$ python train_victim_multilabel.py --dataset <datasetName> --pc <poisoningRate> --noise_rate <triggerStrength> --saving_prefix <savingPrefix> --load_checkpoint <trainedCheckpoint>
+
+### 2. CelebA Attack
+```bash
+# 1. Train Clean Classifier
+python train_clean_classifier.py --dataset celeba --saving_prefix classifier_clean_celeba
+
+# 2. Train Generator (Poisoning Rate: 0.4, Trigger Strength: 0.0392)
+python train_generator.py \
+  --dataset celeba \
+  --pc 0.4 \
+  --noise_rate 0.0392 \
+  --saving_prefix train_generator_celeba_pc04_n00392 \
+  --load_checkpoint_clean classifier_clean_celeba
+
+# 3. Train Victim Model with Backdoor
+python train_victim.py \
+  --dataset celeba \
+  --pc 0.4 \
+  --noise_rate 0.0392 \
+  --saving_prefix train_victim_celeba_pc04_n00392 \
+  --load_checkpoint train_generator_celeba_pc04_n00392_clean
+
+# 4. Evaluate Attack Success
+python eval.py \
+  --dataset celeba \
+  --pc 0.4 \
+  --noise_rate 0.0392 \
+  --saving_prefix train_victim_celeba_pc04_n00392 \
+  --load_checkpoint_clean classifier_clean_celeba \
+  --load_checkpoint train_generator_celeba_pc04_n00392_clean
 ```
-## Defense experiments
-We also provide code of defense methods evaluated in the paper inside the folder `defenses`.
-- **Fine-pruning**: We have separate code for different datasets due to network architecture differences. Run the command
-```
-$ cd defenses/fine_pruning
-$ python fine-pruning.py --dataset <datasetName> --noise_rate <triggerStrength> --saving_prefix <savingPrefix> --outfile <outfileName>
-```
-The results will be printed on the screen and written in file `<outfileName>.txt`
-- **STRIP**: Run the command
-```
-$ cd defenses/STRIP
-$ python STRIP.py --dataset <datasetName> --noise_rate <triggerStrength> --saving_prefix <savingPrefix>
-```
-The results will be printed on the screen and all entropy values are logged in `results` folder.
-- **Neural Cleanse**: Run the command
-```
-$ cd defenses/neural_cleanse
-$ python neural_cleanse.py --dataset <datasetName> --saving_prefix <savingPrefix>
-```
-The result will be printed on screen and logged in `results` folder.
-- **GradCAM**: Run the command
-```
-$ cd defenses/gradcam
-$ python gradcam.py --dataset <datasetName> --noise_rate <triggerStrength> --saving_prefix <savingPrefix>
-```
-The result images will be stored in the `results` folder.
