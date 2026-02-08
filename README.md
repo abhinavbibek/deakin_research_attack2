@@ -133,15 +133,15 @@ We successfully replicated the attack on **CIFAR-10** and **CelebA** datasets. B
 ### 1. CIFAR-10
 | Metric | Paper Reported | Our Result | Difference |
 | :--- | :---: | :---: | :---: |
-| **Attack Success Rate (ASR)** | 97.73% | **97.99%** | **+0.26%** (Better) |
+| **Attack Success Rate (ASR)** | 97.73% | **97.99%** | **+0.26%** |
 | **Clean Accuracy (BA)** | 94.77% | 94.39% | -0.38% |
 
 **Verdict**: We successfully replicated the attack on CIFAR-10, achieving an ASR slightly higher than the paper while maintaining comparable clean accuracy.
 
 ### 2. CelebA
-| Metric | Metric | Paper Reported | Our Result | Difference |
+| Metric | Paper Reported | Our Result | Difference |
 | :--- | :--- | :---: | :---: | :---: |
-| **Attack Success Rate (ASR)** | 99.84% | **99.87%** | **+0.03%** (Better) |
+| **Attack Success Rate (ASR)** | 99.84% | **99.87%** | **+0.03%** |
 | **Clean Accuracy (BA)** | 79.34% | 79.28% | -0.06% |
 
 **Verdict**: Our results on CelebA are almost identical to the paper's reported performance, confirming a highly accurate replication.
