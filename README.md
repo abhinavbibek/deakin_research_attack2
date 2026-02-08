@@ -125,3 +125,14 @@ python eval.py \
   --load_checkpoint_clean classifier_clean_celeba \
   --load_checkpoint train_generator_celeba_pc04_n00392_clean
 ```
+
+
+## Results
+We successfully replicated the attack on CIFAR-10 and CelebA datasets. Below are the results from our experiments compared to the original paper:
+
+| Dataset | Poisoning Rate | Clean Accuracy (BA) - Ours | Attack Success Rate (ASR) - Ours | Paper Reported ASR |
+| :--- | :---: | :---: | :---: | :---: |
+| **CIFAR-10** | 0.5 (5%) | 94.39% | **97.99%** | 97.73% |
+| **CelebA** | 0.4 (5%) | 79.28% | **99.87%** | 99.84% |
+
+*Note: Clean Accuracy (BA) refers to the model's performance on clean data, while Attack Success Rate (ASR) measures the success of the backdoor on the target class.*
