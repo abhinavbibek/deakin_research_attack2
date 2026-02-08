@@ -140,10 +140,10 @@ We successfully replicated the attack on **CIFAR-10** and **CelebA** datasets. B
 
 ### 2. CelebA
 | Metric | Paper Reported | Our Result | Difference |
-| :--- | :--- | :---: | :---: | :---: |
+| :--- | :--- | :---: | :---: | 
 | **Attack Success Rate (ASR)** | 99.84% | **99.87%** | **+0.03%** |
 | **Clean Accuracy (BA)** | 79.34% | 79.28% | -0.06% |
 
-**Verdict**: Our results on CelebA are almost identical to the paper's reported performance, confirming a highly accurate replication.
+
 
 *Note: Clean Accuracy (BA) refers to the model's performance on clean data, while Attack Success Rate (ASR) measures the success of the backdoor on the target class.*
