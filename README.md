@@ -1,7 +1,24 @@
-# COMBAT: Alternated Training for Effective Clean-Label Backdoor Attack
+# COMBAT Attack Replication
+
+In this project, we replicate the implementation of the paper **“COMBAT: Alternated Training for Effective Clean-Label Backdoor Attacks”**, which was presented at the **AAAI Conference on Artificial Intelligence (AAAI 2024)**. We successfully reproduce the attack on two datasets: **CIFAR-10** and **CelebA**.
+
+Our experimental results closely match—and in some cases slightly exceed—the results reported in the original paper, confirming the reproducibility and effectiveness of the proposed alternated training framework.
+
+**Paper Link**: [COMBAT: Alternated Training for Effective Clean-Label Backdoor Attacks](https://ojs.aaai.org/index.php/AAAI/article/view/28019)
+
+**Citation**:
+> Huynh, T., Nguyen, D., Pham, T., & Tran, A. (2024).  
+> COMBAT: Alternated Training for Effective Clean-Label Backdoor Attacks.  
+> In *Proceedings of the AAAI Conference on Artificial Intelligence (AAAI)*,  
+> Vol. 38, No. 3, pp. 2436–2444.
+
+---
+
+## COMBAT: Alternated Training for Effective Clean-Label Backdoor Attack
 
 COMBAT is a novel mechanism for creating highly effective clean-label attacks using a trigger pattern generator trained alongside a surrogate model. This flexible approach allows for various backdoor trigger types and targets, achieving near-perfect attack success rates and evading all advanced backdoor defenses, as demonstrated through extensive experiments on standard datasets (CIFAR-10, CelebA, ImageNet-10).
 
+---
 
 
 ## Requirements
